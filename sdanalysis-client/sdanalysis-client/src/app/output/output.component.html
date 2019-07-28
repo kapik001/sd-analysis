@@ -1,0 +1,14 @@
+<div style="padding: 5px">
+
+<div class="border" style="width: 100%; resize: none; height: 25vh; overflow: auto" >
+<div *ngFor="let message of messages">
+  <div *ngIf="message.kind == 'NOK'" style="color: red">
+    {{message.message}}
+  </div>
+  <div *ngIf="message.kind == 'OK'">
+    {{message.message}}
+  </div>
+
+</div>
+</div>
+</div>
