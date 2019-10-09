@@ -1,7 +1,18 @@
 <div style="padding: 5px">
-  <textarea class="form-control rounded-0" style="width: 100%; resize: none; height: 69vh" [(ngModel)]="code"></textarea>
+<!--  <textarea class="form-control rounded-0" style="width: 100%; resize: none; height: 69vh" [(ngModel)]="code"></textarea>-->
+
+  <div ace-editor
+   [(text)]="code"
+  [mode]="'r'"
+  [theme]="'tomorrow_night'"
+  [readOnly]="false"
+  [autoUpdateContent]="true"
+  [durationBeforeCallback]="1000"
+   style="width: 100%; resize: none; height: 69vh" ></div>
+
   <div style="height: 3vh; padding-left: 5px; padding-right: 5px">
     <i class="fas fa-arrow-right" style="color: dodgerblue" (click)="runCode()"></i>
   </div>
+
 
 </div>

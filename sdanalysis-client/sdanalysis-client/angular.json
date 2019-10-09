@@ -26,7 +26,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/ace-builds/src-min/ace.js",
+              "node_modules/ace-builds/src-min/mode-r.js",
+              "node_modules/ace-builds/src-min/theme-tomorrow_night.js",
+              "node_modules/ace-builds/src-min/mode-properties.js"
+            ]
           },
           "configurations": {
             "production": {

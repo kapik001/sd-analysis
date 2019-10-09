@@ -8,6 +8,7 @@ import { OutputComponent } from './output/output.component';
 import {FormsModule} from "@angular/forms";
 import {CodeRunnerService} from "./code-runner/code-runner.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AceEditorModule} from "ng2-ace-editor";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    AceEditorModule,
   ],
   providers: [CodeRunnerService],
   bootstrap: [AppComponent]
