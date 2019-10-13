@@ -5,8 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 import pl.kapusta.sdanalysis.stocksource.StockDataProviderImpl;
 import pl.kapusta.sdanalysis.stocksource.StockDataResolver;
 
@@ -15,6 +17,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class RRunner {
 
     private ScriptEngine engine;

@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {CodeRunnerService} from "./code-runner/code-runner.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AceEditorModule} from "ng2-ace-editor";
+import {SessionService} from "./session/session.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {AceEditorModule} from "ng2-ace-editor";
     HttpClientModule,
     AceEditorModule,
   ],
-  providers: [CodeRunnerService],
+  providers: [CodeRunnerService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

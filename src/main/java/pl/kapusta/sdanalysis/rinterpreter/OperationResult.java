@@ -1,5 +1,5 @@
 package pl.kapusta.sdanalysis.rinterpreter;
 
 public enum OperationResult {
-    OK, NOK
+    OK, NOK, INFO
 }

@@ -12,7 +12,7 @@ export class CodeRunnerService {
   }
 
   runCode(code: string) {
-    this.http.post<InterpreterResult>("http://localhost:8080/interpreter-runner/run-code", {codeToRun: code}).subscribe((res) =>
+    this.http.post<InterpreterResult>("http://localhost:8080/interpreter-runner/run-code", {codeToRun: code},{withCredentials: true}).subscribe((res) =>
       this.emitter.emit(res)
     );
   }
