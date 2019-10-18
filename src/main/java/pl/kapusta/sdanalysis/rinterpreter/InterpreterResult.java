@@ -18,7 +18,7 @@ public class InterpreterResult implements Serializable {
 
     public InterpreterResult(Exception e) {
         if(e != null){
-            result = e.getLocalizedMessage();
+            result = e.getMessage();
         }
         operationResult = OperationResult.NOK;
     }

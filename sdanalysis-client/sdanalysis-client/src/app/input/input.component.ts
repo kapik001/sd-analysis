@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CodeRunnerService} from "../code-runner/code-runner.service";
 import {AceEditorComponent} from "ng2-ace-editor";
+import * as ace from 'ace-builds'
 
 @Component({
   selector: 'app-input',
@@ -10,29 +11,40 @@ import {AceEditorComponent} from "ng2-ace-editor";
 export class InputComponent implements OnInit {
 
   code: string;
+  waitingForCompletion: boolean;
   @ViewChild('editor', {read: AceEditorComponent, static: true}) editor: AceEditorComponent;
 
   constructor(private codeRunner: CodeRunnerService) {
+    this.codeRunner.getEmitter().subscribe(() =>
+      this.waitingForCompletion = false
+    )
   }
 
   ngOnInit() {
     this.code = "";
+    this.waitingForCompletion = false;
+  }
+
+  private runCode(code : string){
+    this.waitingForCompletion = true;
+    this.codeRunner.runCode(code);
   }
 
   runFullCode() {
-    this.codeRunner.runCode(this.code);
+    this.runCode(this.code);
   }
 
   runSelectedCode() {
-    let codeToRun = this.editor.getEditor().selection.doc;
-    console.log(codeToRun)
-    this.codeRunner.runCode(this.code);
+    let selectedText = this.editor.getEditor().getSelectedText();
+    if (selectedText.length > 0) {
+      this.runCode(selectedText);
+    }
   }
 
-//   beautifyCode() {
-//     console.log(this.editor.getEditor())
-//     console.log(this.editorBeautify)
-// }
+  cancelRequest(){
+    this.codeRunner.cancelRequest();
+    this.waitingForCompletion = false;
+  }
 
   keyDownEvent($event) {
     if ($event.altKey && $event.key === 'Enter') {
