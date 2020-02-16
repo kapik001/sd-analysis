@@ -23,7 +23,7 @@ public class NewSessionInfoProviderImpl implements NewSessionInfoProvider {
         initInformations.add(interpreterResult);
         InterpreterResult interpreterResult2 = new InterpreterResult();
         interpreterResult2.setOperationResult(OperationResult.INFO);
-        interpreterResult2.setResult("Run 'help$get' to get help");
+        interpreterResult2.setResult("Run 'stockData$help()' to get help");
         initInformations.add(interpreterResult2);
         return initInformations;
     }

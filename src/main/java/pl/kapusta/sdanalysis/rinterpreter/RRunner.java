@@ -32,6 +32,8 @@ public class RRunner {
             RenjinScriptEngineFactory factory = new RenjinScriptEngineFactory();
             engine = factory.getScriptEngine();
             engine.eval("import(pl.kapusta.sdanalysis.stocksource.StockDataResolver)");
+            engine.eval("library(rpart)");
+            engine.eval("library(aod)");
             engine.put("stockData", stockDataResolver);
 
         } catch (ScriptException e) {

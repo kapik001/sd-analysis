@@ -5,5 +5,7 @@ import java.util.BitSet;
 import java.util.List;
 
 public interface StockDataResolver {
-    List<Double> loadSome(String stockName);
+    String help();
+    List<Double> loadClose(String stockName);
+
 }

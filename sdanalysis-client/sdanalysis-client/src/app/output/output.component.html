@@ -1,17 +1,37 @@
 <div style="padding: 5px">
 
-<div  style="width: 100%; resize: none; height: 25vh; overflow: auto; background-color: #212529" >
-<div *ngFor="let message of messages">
-  <div *ngIf="message.kind == 'NOK'" style="color: red">
-    {{message.message}}
+  <div style="width: 100%; resize: none; height: 25vh; overflow: auto; background-color: #212529">
+    <div *ngFor="let message of messages">
+      <div *ngIf="message.kind == 'NOK'" style="color: red">
+        <div *ngFor=" let m of message.message">
+          <div *ngIf="message.message.length === 1">
+            {{m}}
+          </div>
+          <div *ngIf="message.message.length > 1">
+            + {{m}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="message.kind == 'OK'" style="color: white">
+        <div *ngFor=" let m of message.message">
+          <div *ngIf="message.message.length === 1">
+            {{m}}
+          </div>
+          <div *ngIf="message.message.length > 1">
+            + {{m}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="message.kind == 'INFO'" style="color: lightblue">
+        <div *ngFor=" let m of message.message">
+          <div *ngIf="message.message.length === 1">
+            {{m}}
+          </div>
+          <div *ngIf="message.message.length > 1">
+            + {{m}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div *ngIf="message.kind == 'OK'" style="color: white">
-    {{message.message}}
-  </div>
-  <div *ngIf="message.kind == 'INFO'" style="color: lightblue">
-    {{message.message}}
-  </div>
-
-</div>
-</div>
 </div>
