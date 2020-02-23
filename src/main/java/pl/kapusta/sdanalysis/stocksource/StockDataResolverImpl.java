@@ -14,6 +14,7 @@ public class StockDataResolverImpl implements StockDataResolver {
     private static final String LOAD = "load(String stockName, Integer numberOfDays) - load last numberOfDays data records\n";
     private static final String LOAD_MANY_DATA = "manyLoadData(String[] stockNames) - load last 10 data records for many stock names\n";
     private static final String LOAD_MANY = "manyLoad(String[] stockNames, Integer numberOfDays) - load last numberOfDays data records for many stock names\n";
+    private static final String LOAD_STOCK_NAMES = "getStockNames() - load first 100 stock names";
 
     @Autowired
     private StockDataProvider stockDataProvider;
@@ -24,7 +25,8 @@ public class StockDataResolverImpl implements StockDataResolver {
                 LOAD_DATA +
                 LOAD +
                 LOAD_MANY_DATA +
-                LOAD_MANY;
+                LOAD_MANY +
+                LOAD_STOCK_NAMES;
     }
 
     @Override
@@ -45,5 +47,10 @@ public class StockDataResolverImpl implements StockDataResolver {
     @Override
     public Map<String, List<StockData>> manyLoad(List<String> stockNames, Integer numberOfDays) {
         return stockDataProvider.getMany(stockNames, numberOfDays);
+    }
+
+    @Override
+    public List<CompaniesData> getStockNames() {
+        return stockDataProvider.getStockNames();
     }
 }

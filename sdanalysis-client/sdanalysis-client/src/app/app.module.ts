@@ -10,16 +10,18 @@ import {CodeRunnerService} from "./code-runner/code-runner.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AceEditorModule} from "ng2-ace-editor";
 import {SessionService} from "./session/session.service";
-import {StrategyInputComponent} from "./on-start/strategy-input.component";
+import {StrategyInputComponent} from "./strategy/strategy-input.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AppHeaderComponent} from "./app-header/app-header.component";
 import {InputRepository} from "./input-repository";
+import {StockNamesInputComponent} from "./stock-names-input/stock-names-input.component";
 
 const appRoutes: Routes = [
   { path: 'input', component: InputComponent },
   { path: 'on-start', component: StrategyInputComponent, data: {name: 'on-start'}},
   { path: 'on-next', component: StrategyInputComponent, data: {name: 'on-next'}},
   { path: 'on-end', component: StrategyInputComponent, data: {name: 'on-end'}},
+  { path: 'stock-names', component: StockNamesInputComponent },
   { path: '', redirectTo: 'input', pathMatch: 'full'}
 ];
 
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     InputComponent,
     OutputComponent,
     StrategyInputComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    StockNamesInputComponent
   ],
   imports: [
     BrowserModule,

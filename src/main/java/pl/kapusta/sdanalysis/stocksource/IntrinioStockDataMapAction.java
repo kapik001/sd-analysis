@@ -7,7 +7,7 @@ import pl.kapusta.sdanalysis.util.Muter;
 
 import java.util.function.Function;
 
-public class IntrinioMapAction implements Function<StockPriceSummary, StockData> {
+public class IntrinioStockDataMapAction implements Function<StockPriceSummary, StockData> {
     @Override
     public StockData apply(StockPriceSummary source) {
         StockData stockData = new StockData();

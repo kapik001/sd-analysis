@@ -1,0 +1,10 @@
+<div style="padding: 5px">
+
+  <textarea [(ngModel)]="stockNames" rows="4" cols="50"  style="width: 100%; resize: none; height: 67vh; background-color: #25282c; color: white;" (keypress)="saveChanges()"></textarea>
+
+  <div  style="height: 3vh; color: white; ">
+    <h4  class="fas fa-angle-up" style="color: dodgerblue; padding-left: 4px" title="Upload selected" (click)="uploadCode()"></h4>
+    Put stocks companies codes divided by ';'
+  </div>
+</div>
+

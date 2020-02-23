@@ -6,4 +6,5 @@ import {Injectable} from "@angular/core";
 export class InputRepository {
   freeInput: string = "";
   strategyInput: {};
+  stockNames: string = "";
 }

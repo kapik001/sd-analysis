@@ -6,12 +6,11 @@
        [readOnly]="false"
        [autoUpdateContent]="true"
        [durationBeforeCallback]="100"
-       (keydown)="keyDownEvent($event)"
        (keypress)="saveChanges()" #editor
        style="width: 100%; resize: none; height: 67vh"></ace-editor>
 
   <div  style="height: 3vh; padding-left: 45px; padding-right: 5px ">
-
+    <h4  class="fas fa-angle-up" style="color: dodgerblue; padding-left: 4px" title="Upload selected" (click)="uploadCode()"></h4>
   </div>
 
 </div>
