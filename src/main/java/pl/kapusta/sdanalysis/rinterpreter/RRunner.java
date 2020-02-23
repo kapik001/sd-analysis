@@ -45,4 +45,8 @@ public class RRunner {
             return new InterpreterResult(e);
         }
     }
+
+    public void put(String objectName, Object object){
+        engine.put(objectName, object);
+    }
 }
