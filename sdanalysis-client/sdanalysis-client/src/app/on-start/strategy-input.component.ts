@@ -1,27 +1,36 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CodeRunnerService} from "../code-runner/code-runner.service";
 import {AceEditorComponent} from "ng2-ace-editor";
+import * as ace from 'ace-builds'
 import {InputRepository} from "../input-repository";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  selector: 'strategy-input',
+  templateUrl: './strategy-input.component.html',
+  styleUrls: ['./strategy-input.component.css']
 })
-export class InputComponent implements OnInit {
+export class StrategyInputComponent implements OnInit {
 
   code: string;
   waitingForCompletion: boolean;
+  name: string;
   @ViewChild('editor', {read: AceEditorComponent, static: true}) editor: AceEditorComponent;
 
-  constructor(private codeRunner: CodeRunnerService, private inputRepository: InputRepository) {
+  constructor(private codeRunner: CodeRunnerService, private inputRepository: InputRepository, private activatedRoute: ActivatedRoute) {
     this.codeRunner.getEmitter().subscribe(() =>
       this.waitingForCompletion = false
     )
   }
 
   ngOnInit() {
-    this.code = this.inputRepository.freeInput;
+    this.activatedRoute.data.subscribe((data)=>{
+      this.name = data.name;
+      if (this.inputRepository.strategyInput != null && this.inputRepository.strategyInput[this.name] != null) {
+        this.code = this.inputRepository.strategyInput[this.name];
+      }
+    });
+
     this.waitingForCompletion = false;
   }
 
@@ -53,6 +62,9 @@ export class InputComponent implements OnInit {
   }
 
   saveChanges() {
-    this.inputRepository.freeInput = this.code;
+    if(this.inputRepository.strategyInput == null){
+      this.inputRepository.strategyInput = {}
+    }
+    this.inputRepository.strategyInput[this.name] = this.code;
   }
 }

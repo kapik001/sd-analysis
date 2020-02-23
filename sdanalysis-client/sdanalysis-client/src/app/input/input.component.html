@@ -6,8 +6,9 @@
        [readOnly]="false"
        [autoUpdateContent]="true"
        [durationBeforeCallback]="1000"
-       (keydown)="keyDownEvent($event)" #editor
-       style="width: 100%; resize: none; height: 69vh"></ace-editor>
+       (keydown)="keyDownEvent($event)"
+       (keypress)="saveChanges()" #editor
+       style="width: 100%; resize: none; height: 67vh"></ace-editor>
 
   <div  style="height: 3vh; padding-left: 45px; padding-right: 5px ">
     <h4 *ngIf="!waitingForCompletion" class="fas fa-angle-double-right" style="color: dodgerblue; border: 1px;" title="Run code" (click)="runFullCode()"></h4>

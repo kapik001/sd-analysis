@@ -2,7 +2,10 @@ package pl.kapusta.sdanalysis.stocksource;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface StockDataProvider {
-    List<Double> getData(String stockName, Integer numberOfDays);
+    List<StockData> getData(String stockName, Integer numberOfDays);
+    Map<String, List<StockData>> getMany(List<String> stockNames, Integer numberOfDays);
+
 }

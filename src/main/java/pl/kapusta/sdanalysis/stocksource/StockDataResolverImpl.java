@@ -3,28 +3,47 @@ package pl.kapusta.sdanalysis.stocksource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class StockDataResolverImpl implements StockDataResolver {
 
     private static final String HELP_METHOD = "help() - get help\n";
-    private static final String LOAD_CLOSE = "loadClose(String stockName) - load last 10 close values";
+    private static final String LOAD_DATA = "loadData(String stockName) - load last 10 data records\n";
+    private static final String LOAD = "load(String stockName, Integer numberOfDays) - load last numberOfDays data records\n";
+    private static final String LOAD_MANY_DATA = "manyLoadData(String[] stockNames) - load last 10 data records for many stock names\n";
+    private static final String LOAD_MANY = "manyLoad(String[] stockNames, Integer numberOfDays) - load last numberOfDays data records for many stock names\n";
 
     @Autowired
     private StockDataProvider stockDataProvider;
 
     @Override
     public String help() {
-        return HELP_METHOD + LOAD_CLOSE;
+        return HELP_METHOD +
+                LOAD_DATA +
+                LOAD +
+                LOAD_MANY_DATA +
+                LOAD_MANY;
     }
 
     @Override
-    public List<Double> loadClose(String stockName) {
+    public List<StockData> loadData(String stockName) {
         return stockDataProvider.getData(stockName, 10);
+    }
+
+    @Override
+    public List<StockData> load(String stockName, Integer numberOfDays) {
+        return stockDataProvider.getData(stockName, numberOfDays);
+    }
+
+    @Override
+    public Map<String, List<StockData>> manyLoadData(List<String> stockNames) {
+        return stockDataProvider.getMany(stockNames, 10);
+    }
+
+    @Override
+    public Map<String, List<StockData>> manyLoad(List<String> stockNames, Integer numberOfDays) {
+        return stockDataProvider.getMany(stockNames, numberOfDays);
     }
 }

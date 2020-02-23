@@ -1,0 +1,17 @@
+<div style="padding: 5px">
+  <ace-editor
+       [(text)]="code"
+       [mode]="'r'"
+       [theme]="'tomorrow_night'"
+       [readOnly]="false"
+       [autoUpdateContent]="true"
+       [durationBeforeCallback]="100"
+       (keydown)="keyDownEvent($event)"
+       (keypress)="saveChanges()" #editor
+       style="width: 100%; resize: none; height: 67vh"></ace-editor>
+
+  <div  style="height: 3vh; padding-left: 45px; padding-right: 5px ">
+
+  </div>
+
+</div>
