@@ -72,6 +72,7 @@ for(a in averageMData){
     logger$put(toString(a))
 }
 logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+buyer$sell(data[[iter]]$close)
 logger$put(buyer$result())
 
 

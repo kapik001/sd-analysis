@@ -53,6 +53,7 @@ logger$put('avera datas: ')
 for(a in averageData){
     logger$put(toString(a))
 }
+buyer$sell(data[[iter]]$close)
 logger$put(buyer$result())
 
 
