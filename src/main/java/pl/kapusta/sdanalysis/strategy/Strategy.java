@@ -82,21 +82,25 @@ public class Strategy {
     private InterpreterResult runStrategy() {
         InterpreterResult result = new InterpreterResult();
         result.setResult("");
+        runner.put("logger", new Logger(result));
         result.setOperationResult(OperationResult.INFO);
         for (String stockName : stockNames) {
             result.setResult(result.getResult() + "Loading data for:" + stockName + "\n");
-            List<StockData> data = stockDataResolver.load(stockName, 300);
-            if(data == null || data.isEmpty()){
+            List<StockData> data = stockDataResolver.load(stockName, 365);
+            if (data == null || data.isEmpty()) {
                 result.setResult(result.getResult() + "No data loaded for:" + stockName + "\n");
             } else {
                 runner.put("data", data);
+                runner.put("buyer", new Buyer());
                 result.setResult(result.getResult() + "Running on start script" + "\n");
                 result.setResult(result.getResult() + onStartScript + "\n");
                 runCommandAndPropagateToResult(onStartScript, result);
                 result.setResult(result.getResult() + "Running on next day script" + "\n");
                 result.setResult(result.getResult() + onNextDayScript + "\n");
-                for(StockData today: data){
-                    runner.put("today", today);
+                runner.put("noOfDays", data.size());
+                for (int i = 1; i <= data.size(); i++) {
+                    runner.put("today", data.get(i - 1));
+                    runner.put("iter", i);
                     runCommandAndPropagateToResult(onNextDayScript, result);
                 }
                 result.setResult(result.getResult() + "Running on end day script" + "\n");
@@ -109,9 +113,13 @@ public class Strategy {
 
     private void runCommandAndPropagateToResult(String command, InterpreterResult result) {
         InterpreterResult inResult = runner.run(command);
-        result.setResult(result.getResult() + inResult.getResult() + "\n");
+        result.setResult(result.getResult() + resolveResult(inResult.getResult()) + "\n");
         if (OperationResult.NOK.equals(inResult.getOperationResult())) {
             result.setOperationResult(OperationResult.NOK);
         }
+    }
+
+    private String resolveResult(String result) {
+        return result != null ? ("NULL".equals(result) ? "" : result) : "";
     }
 }

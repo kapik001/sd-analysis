@@ -1,7 +1,6 @@
 package pl.kapusta.sdanalysis.stocksource;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class StockData implements Serializable {

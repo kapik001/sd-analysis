@@ -37,4 +37,7 @@ export class OutputComponent implements OnInit {
     });
   }
 
+  clear(){
+    this.messages = [];
+  }
 }
