@@ -5,7 +5,7 @@
        [theme]="'tomorrow_night'"
        [readOnly]="false"
        [autoUpdateContent]="true"
-       [durationBeforeCallback]="1000"
+       [durationBeforeCallback]="50"
        (keydown)="keyDownEvent($event)"
        (keypress)="saveChanges()" #editor
        style="width: 100%; resize: none; height: 67vh"></ace-editor>

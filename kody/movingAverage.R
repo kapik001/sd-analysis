@@ -58,3 +58,4 @@ logger$put(buyer$result())
 
 #stockNames
 AAPL
+MSFT
