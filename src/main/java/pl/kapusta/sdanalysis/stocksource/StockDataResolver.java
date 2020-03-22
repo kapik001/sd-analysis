@@ -10,7 +10,7 @@ public interface StockDataResolver {
 
     List<StockData> loadData(String stockName);
 
-    List<StockData> load(String stockName, Integer numberOfDays);
+    List<StockData> load(String stockName, Double numberOfDays);
 
     Map<String, List<StockData>> manyLoadData(List<String> stockNames);
 

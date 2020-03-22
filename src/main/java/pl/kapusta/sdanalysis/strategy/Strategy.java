@@ -86,7 +86,7 @@ public class Strategy {
         result.setOperationResult(OperationResult.INFO);
         for (String stockName : stockNames) {
             result.setResult(result.getResult() + "Loading data for:" + stockName + "\n");
-            List<StockData> data = stockDataResolver.load(stockName, 365);
+            List<StockData> data = stockDataResolver.load(stockName, 365d);
             if (data == null || data.isEmpty()) {
                 result.setResult(result.getResult() + "No data loaded for:" + stockName + "\n");
             } else {

@@ -40,13 +40,21 @@ public class RRunner {
 
     public InterpreterResult run(String command) {
         try {
-            return new InterpreterResult(engine.eval(command));
+            InterpreterResult result = new InterpreterResult();
+            result.setResult("");
+            engine.put("logger", new pl.kapusta.sdanalysis.strategy.Logger(result));
+            String commandResult = engine.eval(command).toString();
+            if (!"NULL".equals(commandResult)) {
+                result.setResult(result.getResult() + commandResult + "\n");
+            }
+            result.setOperationResult(OperationResult.INFO);
+            return result;
         } catch (Exception e) {
             return new InterpreterResult(e);
         }
     }
 
-    public void put(String objectName, Object object){
+    public void put(String objectName, Object object) {
         engine.put(objectName, object);
     }
 }

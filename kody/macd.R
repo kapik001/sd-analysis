@@ -56,9 +56,6 @@ if (iter >= M) {
 
 
 
-
-
-
 #on end
 logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 logger$put('N datas: ')
@@ -73,7 +70,7 @@ for(a in averageMData){
 }
 logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 buyer$sell(data[[iter]]$close)
-logger$put(buyer$result())
+logger$put(buyer$result(data[[iter]]$close))
 
 
 #stockNames

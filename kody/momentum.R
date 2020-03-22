@@ -9,7 +9,7 @@ logger$put(iter)
 logger$put('close:')
 logger$put(data[[iter]]$close)
 if (iter >= M) {
-    momentum = data[[iter]]$close - data[[iter - M]]$close
+    momentum = data[[iter]]$close - data[[iter - M + 1]]$close
     momentumData <- c(momentumData, momentum)
     momentumSize = length(momentumData)
     if (momentumSize > 2) {
@@ -29,7 +29,6 @@ if (iter >= M) {
 }
 
 
-
 #on end
 logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 logger$put('M datas: ')
@@ -37,7 +36,7 @@ for (m in momentumData) {
     logger$put(toString(m))
 }
 logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-logger$put(buyer$result())
+logger$put(buyer$result(data[[iter]]$close))
 
 
 #stockNames

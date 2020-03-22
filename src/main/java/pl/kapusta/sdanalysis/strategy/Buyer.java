@@ -11,19 +11,28 @@ public class Buyer {
 
     public void buy(Double price) {
         if (!buyed) {
-            amount += price;
+            amount -= price;
             buyed = true;
         }
     }
 
     public void sell(Double price) {
         if (buyed) {
-            amount -= price;
+            amount += price;
             buyed = false;
         }
     }
 
-    public Double result(){
+    public Double result() {
         return amount;
     }
+
+    public Double result(Double lastPrice) {
+        if (buyed) {
+            return amount + lastPrice;
+        } else {
+            return amount;
+        }
+    }
+
 }

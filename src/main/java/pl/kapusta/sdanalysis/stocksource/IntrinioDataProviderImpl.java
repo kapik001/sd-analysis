@@ -24,8 +24,8 @@ public class IntrinioDataProviderImpl implements StockDataProvider {
     private static final Logger LOG = LoggerFactory.getLogger(IntrinioDataProviderImpl.class);
 
     @Override
-    public List<StockData> getData(String stockName, Integer numberOfDays) {
-       return this.getIndividual(stockName, numberOfDays);
+    public List<StockData> getData(String stockName, Double numberOfDays) {
+       return this.getIndividual(stockName, numberOfDays.intValue());
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Logger {
         this.interpreterResult = interpreterResult;
     }
 
-    public void put(String log){
-        interpreterResult.setResult(interpreterResult.getResult() + log + "\n");
+    public void put(Object log){
+        interpreterResult.setResult(interpreterResult.getResult() + log.toString() + "\n");
     }
 }

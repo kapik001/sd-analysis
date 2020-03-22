@@ -31,11 +31,11 @@ public class StockDataResolverImpl implements StockDataResolver {
 
     @Override
     public List<StockData> loadData(String stockName) {
-        return stockDataProvider.getData(stockName, 10);
+        return stockDataProvider.getData(stockName, 10d);
     }
 
     @Override
-    public List<StockData> load(String stockName, Integer numberOfDays) {
+    public List<StockData> load(String stockName, Double numberOfDays) {
         return stockDataProvider.getData(stockName, numberOfDays);
     }
 

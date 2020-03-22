@@ -22,14 +22,14 @@ if(iter >= N){
     if(iter >= N + 1 && iter < noOfDays){
         #cena przecina od góry - sprzedawać
         if(data[[iter - 1]]$close > previousAverage && data[[iter]]$close < average){
-            buyer$buy(data[[iter]]$close)
-            logger$put('buy at:')
+            buyer$sell(data[[iter]]$close)
+            logger$put('sell at:')
             logger$put(data[[iter]]$close)
         }
         #cena przecina od dołu - kupować
         if(data[[iter - 1]]$close < previousAverage && data[[iter]]$close > average){
-            buyer$sell(data[[iter]]$close)
-            logger$put('sell at:')
+            buyer$buy(data[[iter]]$close)
+            logger$put('buy at:')
             logger$put(data[[iter]]$close)
         }
     }
@@ -53,8 +53,7 @@ logger$put('avera datas: ')
 for(a in averageData){
     logger$put(toString(a))
 }
-buyer$sell(data[[iter]]$close)
-logger$put(buyer$result())
+logger$put(buyer$result(data[[iter]]$close))
 
 
 #stockNames
