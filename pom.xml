@@ -62,7 +62,11 @@
             <artifactId>aod</artifactId>
             <version>1.3-b257</version>
         </dependency>
-
+            <dependency>
+                <groupId>org.renjin.cran</groupId>
+                <artifactId>neuralnet</artifactId>
+                <version>1.33-b23</version>
+            </dependency>
 <!--        initrinio dependencies-->
         <dependency>
             <groupId>com.intrinio</groupId>

@@ -32,6 +32,7 @@ public class RRunner {
             engine.eval("import(pl.kapusta.sdanalysis.stocksource.StockDataResolver)");
             engine.eval("library(rpart)");
             engine.eval("library(aod)");
+            engine.eval("library('org.renjin.cran:neuralnet')");
             engine.put("stockData", stockDataResolver);
         } catch (ScriptException e) {
             LOG.error("Exception when creating R interpreter", e);
