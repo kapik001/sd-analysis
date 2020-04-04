@@ -1,4 +1,8 @@
+#run before
 loadedData=stockData$load('AAPL', 365)
+
+#on start
+probData <- c()
 
 df <- data.frame(
 Today=integer(),
@@ -31,56 +35,40 @@ for (i in 20 : (lengthOfData - 2)) {
     df.X10[i-20] <-if (loadedData[[i - 10]]$close >  loadedData[[i - 11]]$close)  1 else 0
 }
 
-for(i in 0 : 400){
-    logger$put(df.X5[i])
-}
-
-
 nn = neuralnet(Tomorrow ~ Today + X1 + X2 + X3 + X5 + X10, data = data.frame(Tomorrow =  df.Tomorrow, Today = df.Today, X1 = df.X1, X2 = df.X2, X3 =  df.X3, X5 = df.X5, X10 = df.X10))
 
-#mylogit <- glm(data.frame(df.Today, df.X1, df.X2, df.X3, df.X5, df.X10), df.Tomorrow,  family = binomial())
-
-#tree <- rpart(formula = Tomorrow ~  Today + X1 + X2 + X3 + X5 + X10, data = df)
-
-loadedData2=stockData$load('MSFT', 365)
-
-df2 <- data.frame(
-Tomorrow=integer(),
-Today=integer(),
-X1=integer(),
-X2=integer(),
-X3=integer(),
-X5=integer(),
-X10=integer())
-
-df2.Today <- c()
-df2.Tomorrow <- c()
-df2.X1 <- c()
-df2.X2 <- c()
-df2.X3 <- c()
-df2.X5 <- c()
-df2.X10 <- c()
-
-t = c()
-
-lengthOfData2=length(loadedData2)
-#filling with 'isGrowing'
-for (i in 20 : (lengthOfData2 - 2)) {
-    df2.Tomorrow[i-20] <- if (loadedData2[[i + 1]]$close > loadedData2[[i]]$close)  1 else 0
-    df2.Today[i-20] <- if(loadedData2[[i]]$close > loadedData2[[i - 1]]$close)  1 else 0
-    df2.X1[i-20] <-if (loadedData2[[i - 1]]$close > loadedData2[[i - 2]]$close)  1 else 0
-    df2.X2[i-20] <-if (loadedData2[[i - 2]]$close > loadedData2[[i - 3]]$close)  1 else 0
-    df2.X3[i-20] <-if (loadedData2[[i - 3]]$close > loadedData2[[i - 4]]$close)  1 else 0
-    df2.X5[i-20] <-if (loadedData2[[i - 5]]$close > loadedData2[[i - 6]]$close)  1 else 0
-    df2.X10[i-20] <-if (loadedData2[[i - 10]]$close >  loadedData2[[i - 11]]$close)  1 else 0
+#on next
+logger$put('day:')
+logger$put(iter)
+logger$put('close:')
+logger$put(data[[iter]]$close)
+if (iter >= 20) {
+    Today <- if(data[[iter]]$close > data[[iter - 1]]$close)  1 else 0
+    X1 <- if (data[[iter - 1]]$close > data[[iter - 2]]$close)  1 else 0
+    X2 <- if (data[[iter - 2]]$close > data[[iter - 3]]$close)  1 else 0
+    X3 <- if (data[[iter - 3]]$close > data[[iter - 4]]$close)  1 else 0
+    X5 <- if (data[[iter - 5]]$close > data[[iter - 6]]$close)  1 else 0
+    X10 <- if (data[[iter - 10]]$close >  data[[iter - 11]]$close)  1 else 0
+    predict <- compute(nn, data.frame(Today = Today, X1 = X1, X2 =X2, X3 = X3, X5 = X5, X10 = X10))
+    probData = c(probData, predict$net.result)
+    if(predict$net.result > 0.5) {
+        buyer$buy(data[[iter]]$close)
+        logger$put('buy at:')
+        logger$put(data[[iter]]$close)
+    } else {
+        buyer$sell(data[[iter]]$close)
+        logger$put('sell at:')
+        logger$put(data[[iter]]$close)
+    }
 }
 
-predict=compute(nn, data.frame(Today = df2.Today, X1 = df2.X1, X2 = df2.X2, X3 =  df2.X3, X5 = df2.X5, X10 = df2.X10))
-logger$put(predict$net.result)
 
+#on end
 
-
-for(i in 0: 300){
-    logger$put(p[i])
+logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+logger$put('P datas: ')
+for (m in probData) {
+    logger$put(toString(m))
 }
-
+logger$put('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+logger$put(buyer$result(data[[iter]]$close))
